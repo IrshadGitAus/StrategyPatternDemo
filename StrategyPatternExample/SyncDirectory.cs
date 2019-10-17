@@ -1,4 +1,5 @@
 ﻿using StrategyPatternExample.Core.Interfaces;
+using StrategyPatternExample.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,33 @@ namespace StrategyPatternExample
 {
     public class SyncDirectory
     {
-        private string _srcDir;
-        private string _destDir;
-        private IDeleteStrategy _deleteStrategy;
+        string _srcDir;
+        string _destDir;
+        //NoDelete d;
+        DeleteFiles d;
+        //DeleteFilesExceptPDF d;
 
-        public SyncDirectory(string srcDir, string destDir, IDeleteStrategy deleteStrategy)
+        public SyncDirectory()
         {
-            _srcDir = srcDir;
-            _destDir = destDir;
-            _deleteStrategy = deleteStrategy;
+            _srcDir = "";
+            _destDir = "";
+
+            /* NOw that we are applying Depency Injection, these lines with new should not exist.
+              And we need interfaces for each of the classes below
+            */
+            //d = new NoDelete();
+            d = new DeleteFiles();
+            //d = new DeleteFilesExceptPDF();                                     
         }
 
-        public void Sync()
+        public void processFiles()
         {
-            _deleteStrategy.DeleteExtraFiles(_srcDir, _destDir);
+            Sync(_srcDir, _destDir, d);
+        }
+
+        public void Sync(string srcDir, string destDir, IDeleteStrategy deleteStrategy)
+        {
+            deleteStrategy.DeleteExtraFiles(_srcDir, _destDir);
         }
 
     }

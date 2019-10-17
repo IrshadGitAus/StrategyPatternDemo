@@ -13,15 +13,8 @@ namespace StrategyPatternExample
         {
             Console.WriteLine("Start the sync");
 
-            string src="";
-            string dest="";
-
-            //NoDelete d = new NoDelete();
-            //DeleteFiles d = new DeleteFiles();
-            DeleteFilesExceptPDF d = new DeleteFilesExceptPDF();
-
-            SyncDirectory sd = new SyncDirectory(src, dest, d);
-            sd.Sync();
+            SyncDirectory sd = new SyncDirectory();
+            sd.processFiles();
 
             Console.WriteLine("End the sync");
 

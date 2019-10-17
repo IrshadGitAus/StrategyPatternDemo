@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Interfaces\IDeleteStrategy.cs" />
+    <Compile Include="Core\Interfaces\INoDelete.cs" />
     <Compile Include="Core\Services\DeleteFiles.cs" />
     <Compile Include="Core\Services\DeleteFilesExceptPDF.cs" />
     <Compile Include="Core\Services\NoDelete.cs" />
